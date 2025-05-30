@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Financeiro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light text-dark p-4">
+  <div class="container">
+    <h1 class="mb-4 text-center">📊 Dashboard de Ações (Alpha Vantage)</h1>
+
+    <!-- Formulário de busca -->
+    <form class="d-flex justify-content-center mb-4" onsubmit="event.preventDefault(); buscarAcao()">
+      <input id="inputSimbolo" class="form-control me-2" style="max-width: 300px;" type="text" placeholder="Ex: PETR4.SA ou AAPL" />
+      <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+
+    <!-- Indicadores -->
+    <div id="indicadores" class="row g-3 mb-4"></div>
+
+    <!-- Gráfico Chart.js -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <canvas id="grafico" height="100"></canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico gerado pelo matplotlib -->
+    <div class="text-center">
+      <img id="graficoMatplotlib" src="" class="img-fluid border shadow" alt="Gráfico gerado" style="max-width: 100%;">
+    </div>
+  </div>
+
+  <script src="/static/js/chart_config.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
