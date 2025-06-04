@@ -11,9 +11,7 @@ def analisar_acao(dados_json, simbolo):
 
     # Verificações defensivas
     if df.empty or 'preco' not in df.columns:
-        return {
-            "erro": "Dados insuficientes para análise."
-        }
+        return {"erro": "Dados insuficientes para análise."}
 
     # Conversão e ordenação por data
     df['data'] = pd.to_datetime(df['data'])
@@ -23,14 +21,12 @@ def analisar_acao(dados_json, simbolo):
     # Cálculos principais
     df['retorno_diario'] = df['preco'].pct_change()
 
-    # Verifica se foi possível calcular o retorno
     if df['retorno_diario'].isnull().all():
-        return {
-            "erro": "Não foi possível calcular o retorno diário."
-        }
+        return {"erro": "Não foi possível calcular o retorno diário."}
 
     df['retorno_acumulado'] = (1 + df['retorno_diario']).cumprod() - 1
     df['media_movel_5'] = df['preco'].rolling(window=5).mean()
+    df['media_movel_10'] = df['preco'].rolling(window=10).mean()
 
     # Indicadores estatísticos
     media_retorno = df['retorno_diario'].mean()
@@ -42,6 +38,15 @@ def analisar_acao(dados_json, simbolo):
     preco_min = df['preco'].min()
     preco_max = df['preco'].max()
 
+    # ➕ Novas análises simples
+    retorno_total = (df['preco'].iloc[-1] / df['preco'].iloc[0] - 1) * 100
+    preco_inicio = df['preco'].iloc[0]
+    preco_fim = df['preco'].iloc[-1]
+    dias_alta = int((df['retorno_diario'] > 0).sum())
+    dias_baixa = int((df['retorno_diario'] < 0).sum())
+    maior_retorno = df['retorno_diario'].max() * 100
+    data_maior_retorno = df['retorno_diario'].idxmax().strftime('%d/%m/%Y')
+
     # Criar pasta para salvar os gráficos
     os.makedirs('static/graficos', exist_ok=True)
     caminho_img = f'static/graficos/media_movel_{simbolo}.png'
@@ -50,7 +55,8 @@ def analisar_acao(dados_json, simbolo):
     plt.figure(figsize=(10, 4))
     plt.plot(df.index, df['preco'], label='Preço')
     plt.plot(df.index, df['media_movel_5'], label='Média Móvel (5 dias)')
-    plt.title(f'{simbolo} - Preço com Média Móvel')
+    plt.plot(df.index, df['media_movel_10'], label='Média Móvel (10 dias)')
+    plt.title(f'{simbolo} - Preço e Médias Móveis')
     plt.xlabel('Data')
     plt.ylabel('Preço (R$)')
     plt.legend()
@@ -58,7 +64,7 @@ def analisar_acao(dados_json, simbolo):
     plt.savefig(caminho_img)
     plt.close()
 
-    # Resumo a ser retornado
+    # Retorno final
     return {
         "simbolo": simbolo,
         "media_movel_5_hoje": round(df['media_movel_5'].iloc[-1], 2) if not df['media_movel_5'].isnull().all() else None,
@@ -69,8 +75,16 @@ def analisar_acao(dados_json, simbolo):
         "preco_medio": round(preco_medio, 2),
         "preco_min": round(preco_min, 2),
         "preco_max": round(preco_max, 2),
-        "grafico": "/" + caminho_img
+        "grafico": "/" + caminho_img,
+        "retorno_total": round(retorno_total, 2),
+        "preco_inicio": round(preco_inicio, 2),
+        "preco_fim": round(preco_fim, 2),
+        "dias_alta": dias_alta,
+        "dias_baixa": dias_baixa,
+        "maior_retorno": round(maior_retorno, 2),
+        "data_maior_retorno": data_maior_retorno
     }
+
 
 
 

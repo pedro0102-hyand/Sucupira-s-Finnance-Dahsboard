@@ -10,31 +10,57 @@
   <div class="container">
     <h1 class="mb-4 text-center">📊 Dashboard de Ações (Alpha Vantage)</h1>
 
-    <!-- Formulário de busca -->
+    <!-- Formulário de busca principal -->
     <form class="d-flex justify-content-center mb-4" onsubmit="event.preventDefault(); buscarAcao()">
       <input id="inputSimbolo" class="form-control me-2" style="max-width: 300px;" type="text" placeholder="Ex: PETR4.SA ou AAPL" />
       <button class="btn btn-primary" type="submit">Buscar</button>
     </form>
 
-    <!-- Indicadores -->
+    <!-- Indicadores da primeira ação -->
     <div id="indicadores" class="row g-3 mb-4"></div>
 
-    <!-- Gráfico Chart.js -->
+    <!-- Gráfico Chart.js da primeira ação -->
     <div class="card mb-4">
       <div class="card-body">
         <canvas id="grafico" height="100"></canvas>
       </div>
     </div>
 
-    <!-- Gráfico gerado pelo matplotlib -->
-    <div class="text-center">
+    <!-- Gráfico matplotlib da primeira ação -->
+    <div class="text-center mb-5">
       <img id="graficoMatplotlib" src="" class="img-fluid border shadow" alt="Gráfico gerado" style="max-width: 100%;">
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Formulário de comparação -->
+    <h2 class="mb-3 text-center">📌 Comparar com outra ação</h2>
+    <form class="d-flex justify-content-center mb-4" onsubmit="event.preventDefault(); buscarComparacao()">
+      <input id="inputComparar" class="form-control me-2" style="max-width: 300px;" type="text" placeholder="Ex: AAPL, VALE3.SA" />
+      <button class="btn btn-outline-secondary" type="submit">Comparar</button>
+    </form>
+
+    <!-- Indicadores da ação comparada -->
+    <h4 id="tituloComparacao" style="display:none;" class="text-center mt-4"></h4>
+    <div id="indicadoresComparacao" class="row g-3 mb-4"></div>
+
+    <!-- Gráfico Chart.js da comparação -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <canvas id="graficoComparacao" height="100"></canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico matplotlib da comparação -->
+    <div class="text-center">
+      <img id="graficoMatplotlibComparacao" src="" class="img-fluid border shadow" style="max-width: 100%;">
     </div>
   </div>
 
   <script src="/static/js/chart_config.js"></script>
 </body>
 </html>
+
 
 
 
