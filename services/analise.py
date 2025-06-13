@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
+
 def analisar_acao(dados_json, simbolo):
     # Converte o JSON em DataFrame
     df = pd.DataFrame(dados_json)

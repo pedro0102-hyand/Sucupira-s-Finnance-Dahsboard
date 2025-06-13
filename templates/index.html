@@ -19,7 +19,26 @@
     <!-- Indicadores da primeira ação -->
     <div id="indicadores" class="row g-3 mb-4"></div>
 
-    <!-- Gráfico Chart.js da primeira ação -->
+    <!-- Card de Previsão -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-12">
+        <div class="card border-warning">
+          <div class="card-body">
+            <h5 class="card-title">📈 Preço Previsto (5 dias)</h5>
+            <p class="card-text text-warning fw-bold" id="previsaoCard">---</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráfico da previsão -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <canvas id="graficoPrevisao" height="100"></canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico da primeira ação -->
     <div class="card mb-4">
       <div class="card-body">
         <canvas id="grafico" height="100"></canvas>
@@ -44,7 +63,19 @@
     <h4 id="tituloComparacao" style="display:none;" class="text-center mt-4"></h4>
     <div id="indicadoresComparacao" class="row g-3 mb-4"></div>
 
-    <!-- Gráfico Chart.js da comparação -->
+    <!-- Card de Previsão Comparativa -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-12">
+        <div class="card border-warning">
+          <div class="card-body">
+            <h5 class="card-title">📈 Preço Previsto (5 dias) - Comparação</h5>
+            <p class="card-text text-warning fw-bold" id="previsaoComparacaoCard">---</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráfico da comparação -->
     <div class="card mb-4">
       <div class="card-body">
         <canvas id="graficoComparacao" height="100"></canvas>
@@ -52,14 +83,25 @@
     </div>
 
     <!-- Gráfico matplotlib da comparação -->
-    <div class="text-center">
+    <div class="text-center mb-4">
       <img id="graficoMatplotlibComparacao" src="" class="img-fluid border shadow" style="max-width: 100%;">
+    </div>
+
+    <!-- Gráfico da previsão da comparação -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <canvas id="graficoPrevisaoComparacao" height="100"></canvas>
+      </div>
     </div>
   </div>
 
   <script src="/static/js/chart_config.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 

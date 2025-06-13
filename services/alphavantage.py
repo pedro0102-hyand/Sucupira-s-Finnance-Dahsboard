@@ -1,6 +1,7 @@
 import requests
+import pandas as pd 
 
-API_KEY = "2QLB3UXOIICHA0YM"  
+API_KEY = "9DD1E9MZAMN8E04Z."  
 
 def buscar_dados_acao(simbolo):
     url = "https://www.alphavantage.co/query"
@@ -26,5 +27,14 @@ def buscar_dados_acao(simbolo):
         historico.append({"data": data, "preco": preco})
 
     return historico
+
+def obter_dados_acao(simbolo) :
+    historico =  buscar_dados_acao(simbolo)
+    if not historico:
+        raise Exception(f"Erro ao obter dados para {simbolo}")
+    
+    df =  pd.DataFrame(historico)
+    df['data'] = pd.to_datetime(df["data"])
+    return df.sort_values("data")
 
 
