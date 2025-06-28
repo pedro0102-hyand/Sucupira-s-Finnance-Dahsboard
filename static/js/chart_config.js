@@ -139,6 +139,7 @@ function atualizarPrevisao(simbolo) {
             }
 
             document.getElementById("previsaoCard").innerText = previsao.precos.join(" → ");
+            document.getElementById("previsaoCardResumo").innerText = previsao.resumo_preditivo;
             graficoPrevisao.data.labels = previsao.datas;
             graficoPrevisao.data.datasets[0].data = previsao.precos;
             graficoPrevisao.update();
@@ -288,6 +289,8 @@ function atualizarIndicadoresComparacao(simbolo) {
                   graficoPrevisaoComparacao.data.labels = previsao.datas;
                   graficoPrevisaoComparacao.data.datasets[0].data = previsao.precos;
                   graficoPrevisaoComparacao.update();
+                  document.getElementById("previsaoComparacaoResumo").innerText = previsao.resumo_preditivo;
+
               });
       });
 }
